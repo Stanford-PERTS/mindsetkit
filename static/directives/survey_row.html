@@ -1,0 +1,94 @@
+<div class="row">
+  <div class="col-sm-4">
+    <div class="row title">
+      <div class="col-sm-6">
+        {[ survey.assessmentName ]}
+      </div>
+      <div class="col-sm-6">
+        {[ survey.group_name ]}
+
+        <!-- Using initials is the default, so no special notice required. -->
+    <!--     <span ng-if="survey.auth_type == 'initials'">
+          using initials!!
+        </span>
+     -->
+        <span ng-if="survey.auth_type == 'ids'">
+          using IDs.
+        </span>
+      </div>
+    </div>
+    <fieldset class="survey-links">
+      <legend>Important Links</legend>
+      <div class="row">
+        <div class="col-sm-6">
+          <a class="btn btn-primary fa fa-list-ul"
+             ng-href="/mindsetmeter/instructions/{[survey.uid]}">
+            Guide
+          </a>
+          <a class="btn btn-default fa fa-bar-chart"
+             ng-href="https://survey.perts.net/results/{[ survey.url_name ]}/{[ survey.private_keys.join('-') ]}?for={[ survey.group_name | encodeURIComponent ]}">
+            Report
+          </a>
+        </div>
+        <div class="col-sm-6">
+          <a class="btn btn-default fa fa-search"
+             ng-href="https://survey.perts.net/take/{[survey.url_name]}">
+            Preview
+          </a>
+
+  <!--         <a class="btn btn-default fa fa-play" href="/mindsetmeter/enter">
+            Participant Entry
+          </a>
+   -->
+          <a href="/go">mindsetkit.org/go</a>
+
+        </div>
+      </div>
+    </fieldset>
+  </div>
+  <div class="col-sm-7">
+    <div class="row"  ng-repeat="key in survey.public_keys">
+      <div class="col-sm-3">
+        {[ survey.entry_code ]} {[ $index + 1 ]}
+      </div>
+
+      <!-- MSK won't have response numbers for awhile. Hide for now. -->
+<!--       <div class="col-sm-3">
+        {[ survey.num_responses[$index] ]}
+      </div>
+ -->
+      <div class="col-sm-6">
+        <div class="form-group survey-notes">
+          <span class="error-message"
+                ng-bind="surveyAlerts.errorMessage"></span>
+          <textarea ng-model="survey.json_properties.notes[$index]"
+                    ng-change="noteChange($index)"
+                    placeholder="Where, when, or how you'll do the survey"
+                    class="form-control"></textarea>
+        </div>
+        <div class="updating-spinner">
+          <i ng-show="surveyAlerts.updating === $index" ng-cloak
+             class="fa fa-spinner fa-spin fa-lg"></i>
+        </div>
+        <div class="updated-confirmation">
+          <i ng-show="surveyAlerts.confirmation === $index" ng-cloak
+             class="fa fa-check"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-1">
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button"
+              id="dropdownMenu-{[survey.uid]}" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="true">
+        <i class="fa fa-ellipsis-v fa-lg"></i>
+      </button>
+      <ul class="dropdown-menu"
+          aria-labelledby="dropdownMenu-{[survey.uid]}">
+        <li><a href="#" ng-click="$parent.deleteSurvey(survey)">Delete</a></li>
+      </ul>
+  </div>
+
+</div>

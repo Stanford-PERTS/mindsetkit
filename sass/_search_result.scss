@@ -1,0 +1,134 @@
+@include keyframes(fade-left) {
+  0%,25% { @include opacity(0.0);; margin-left: 30px; }
+  100% { @include opacity(1.0);; margin-left: 0px; }
+}
+
+.search-result {
+  margin-bottom: 45px;
+  @include animation(fade-left 0.8s ease-out);
+
+  .title-row {
+    position: relative;
+    padding-right: 80px;
+
+    h2 {
+      margin-top: 0;
+      margin-bottom: 5px;
+      font-size: 20px;
+      letter-spacing: 0.5px;
+
+      a { color: $font-color; }
+    }
+    .activity-data {
+      position: absolute;
+      top: 0;
+      right: 0;
+      text-align: right;
+      color: $light-font-color;
+
+      > span {
+        margin-left: 8px;
+      }
+      > span:first-child {
+        margin-left: 0;
+      }
+      > span.highlight {
+        color: $search-accent-color;
+      }
+    }
+  }
+  .tag-row {
+    .tag {
+      display: inline-block;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 12px;
+      margin-bottom: 6px;
+      font-weight: $font-weight-bold;
+      padding-right: 18px;
+      position: relative;
+
+      &:after {
+        content: '';
+        position: absolute;
+        display: block;
+        @include border-radius(5px);
+        height: 5px;
+        width: 5px;
+        right: 7px;
+        top: 7px;
+        background-color: $font-color;
+      }
+
+      &:last-child:after {
+        content: none;
+      }
+    }
+    .attachment-tag {
+      color: $search-accent-color;
+    }
+    .content-tag {
+      color: $light-font-color;
+    }
+  }
+  p.summary {
+    color: #6e6e6e;
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
+  .author-row {
+    > div {
+      display: inline-block;
+      vertical-align: top;
+    }
+    .user-image {
+      height: 38px;
+      width: 38px;
+      margin-right: 5px;
+      @include border-radius(20px);
+      @include background-size(cover);
+    }
+    .byline {
+      color: $light-font-color;
+      font-size: 13px;
+    }
+    .date {
+      color: $light-font-color;
+    }
+  }
+
+  .lesson-indicator {
+    display: inline-block;
+    padding: 4px 8px 7px 8px;
+    color: white;
+    font-weight: $font-weight-bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 12px;
+    // background-color: $search-accent-color;
+    border-top: 3px solid $search-accent-color;
+    color: $search-accent-color;
+    @include transition(0.12s ease-in-out);
+
+    &:hover {
+      // background-color: darken($search-accent-color, 10);
+      background-color: $search-accent-color;
+      color: white;
+    }
+  }
+
+  .course-instructions {
+    color: $light-font-color;
+    font-size: 12px;
+    font-weight: $font-weight-bold;
+    letter-spacing: 0.5px;
+    margin-bottom: 5px;
+  }
+
+  a.course-link {
+    @extend .lesson-indicator;
+    margin-right: 5px;
+    text-decoration: none;
+    @include animation(fade-right 0.4s ease-out);
+  }
+}

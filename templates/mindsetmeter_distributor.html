@@ -1,0 +1,252 @@
+{% extends 'base.html' %}
+
+{% set controller = "MindsetmeterDistributorCtrl" %}
+
+{% block content %}
+
+
+<div class="full-container clean-style mindsetmeter-page">
+
+  <!-- Main content -->
+
+  <div class="page-content">
+    <div class="container">
+
+      <!-- Assessments -->
+      <div class="row">
+        <div class="col-sm-10">
+          <h2>
+            Mindset Meter Surveys
+            <a class="btn btn-primary pull-right" data-toggle="modal"
+               data-target="#createAssessmentModal" ng-show="user.is_admin">
+              New Assessment
+            </a>
+          </h2>
+        </div>
+      </div>
+      <div class="assessments">
+        <div class="assessment" ng-repeat="asmt in assessments">
+          <div class="row">
+            <div class="col-sm-3 name">{[ asmt.name ]}</div>
+            <div class="col-sm-4">
+              <p ng-hide="user.is_admin">{[ asmt.description ]}</p>
+              <textarea ng-show="user.is_admin"
+                        ng-model="asmt.description"
+                        ng-change="descriptionChange(asmt)">
+              </textarea>
+            </div>
+            <div class="col-sm-2">
+              <span tooltip="Complete separately to see growth over time.">{[ asmt.num_phases ]} phases</span>
+            </div>
+            <div class="col-sm-3">
+              <!-- @todo: MM1 doesn't have SSL! this is just http for now, but
+                   should change it to https later. -->
+              <a data-toggle="modal" data-target="#createSurveyModal"
+                 ng-click="setCurrentAssessment(asmt)" ng-show="user"
+                 class="btn btn-primary pull-right">
+                Use Survey
+              </a>
+              <a ng-click="loginBeforeCreatingSurvey(asmt)" ng-hide="user"
+                 class="btn btn-primary pull-right">
+                Use Survey
+              </a>
+              <a ng-href="http://survey.perts.net/take/{[asmt.url_name]}"
+                 class="btn btn-default pull-right fa fa-search">
+                Preview
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Surveys -->
+      <div class="survey-table">
+        <div class="row">
+          <div class="col-sm-8">
+            <h2>My Surveys</h2>
+          </div>
+        </div>
+        <div class="survey-table_header">
+          <div class="row">
+            <div class="col-sm-2">Assessment</div>
+            <div class="col-sm-2">For</div>
+            <div class="col-sm-2">Entry Code</div>
+            <!-- <div class="col-sm-2">Responses</div> -->
+            <div class="col-sm-4">Notes</div>
+          </div>
+        </div>
+        <div survey-row ng-repeat="s in surveys" ng-show="surveys.length > 0"
+             survey="s"></div>
+        <div ng-show="surveys.length == 0">
+          <p>You don't have any surveys yet.</p>
+          <p>
+            You can create surveys for others to take (or for yourself) by
+            clicking the "Use Survey" button next to one of the available
+            templates above.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% include 'components/footer.html' %}
+
+</div>
+
+{% endblock %}
+
+{% block modals %}
+
+{{ super() }}
+
+<!-- Modal for creating assessments -->
+
+<div class="modal fade" id="createAssessmentModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="create-assessment-modal">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+          </button>
+          <h3>New Assessment</h3>
+        </div>
+
+        <form name="assessmentForm" ng-submit="createAssessment()"
+              novalidate ng-class="{submitted: assessmentSubmitted}">
+          <div class="modal-body">
+            <label>
+              Assessment name
+              <input type="text" ng-model="newAssessment.name" required>
+            </label>
+
+            <label>Templates to make on survey.perts.net (mindsetmeter)</label>
+            <ul>
+              <li><pre>{[ newAssessment.url_name ]}_survey.html</pre></li>
+              <li><pre>{[ newAssessment.url_name ]}_survey_complete.html</pre></li>
+              <li><pre>{[ newAssessment.url_name ]}_results.html</pre></li>
+            </ul>
+
+            <label>Add to "metrics" list in config.py</label>
+            <ul>
+              <li><pre>'{[ newAssessment.url_name ]}'</pre></li>
+            </ul>
+
+            <label>
+              Number of phases
+              <input type="number" min="1" max="4"
+                     ng-model="newAssessment.num_phases" required>
+            </label>
+
+          </div>
+          <div class="modal-footer">
+
+            <button ng-show="!updating" class="bordered-button"
+                    type="submit" ng-disabled="assessmentForm.$invalid">
+              Create Assessment
+            </button>
+            <i ng-show="updating" ng-cloak
+               class="fa fa-spinner fa-spin fa-lg"></i>
+            <span class="error-message" ng-bind="errorMessage"></span>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for creating surveys -->
+
+<div class="modal fade" id="createSurveyModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="create-survey-modal">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+          </button>
+
+          <h3>New Survey with the {[ newSurvey.assessment_name ]} assessment</h3>
+        </div>
+
+        <form name="surveyForm" ng-submit="createSurvey()"
+              novalidate ng-class="{submitted: surveySubmitted}">
+
+          <div class="modal-body">
+
+            <label>
+              Who is the survey for?
+            </label>
+            <!-- @todo: ask Matt if he's got a combo box solution, otherwise
+                 we can use Chosen -->
+            <div class="suggestion-input">
+              <input id="suggestionInput"
+                     ng-model="newSurvey.group_name"
+                     ng-change="showGroupSuggestions()"
+                     ng-focus="showGroupSuggestions()"
+                     autocomplete="off"
+                     >
+                     <!-- ng-blur="hideGroupSuggestions()"> -->
+
+              <div class="suggestions">
+                <div class="suggestion"
+                     ng-repeat="group in suggestions"
+                     ng-click="selectGroup(group)">
+                  {[ group ]}
+                </div>
+              </div>
+            </div>
+
+            <p>
+              This survey has {[ newSurvey.num_phases ]} <em>phases</em>. Have
+              your participants complete each phase at different times to see
+              growth in their responses.
+            </p>
+
+            <p ng-hide="showAuthTypeRadio" ng-show="user.is_admin">
+              <span class="fake-link" ng-click="showAuthTypeRadio = true">
+                (Optional) Choose how participants identify themselves.
+              </span>
+            </p>
+            <p ng-show="showAuthTypeRadio">
+              <label>
+                <input type="radio" ng-model="newSurvey.auth_type" required
+                       name="auth_type" value="ids" style="width: auto">
+                Participants use IDs
+              </label>
+              <br>
+              <label>
+                <input type="radio" ng-model="newSurvey.auth_type" required
+                       name="auth_type" value="initials" style="width: auto">
+                Participants enter their initials
+              </label>
+            </p>
+
+          </div>
+          <div class="modal-footer">
+
+            <span class="error-message" ng-bind="errorMessage"></span>
+            <button ng-show="!updating" class="bordered-button"
+                    type="submit" ng-disabled="surveyForm.$invalid">
+              Create Survey
+            </button>
+            <i ng-show="updating" ng-cloak
+               class="fa fa-spinner fa-spin fa-lg"></i>
+
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,84 @@
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"></meta>
+    {% include '_styles.html' %}
+    <style type="text/css">
+      a.cta, button.cta {
+        background-color: #6f58b0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <table class="email-outer">
+      <tr>
+        <td>
+          <table class="email-inner">
+            <tr>
+              <td>
+                <table class="email-header">
+                  <tr>
+                    <td>
+                      <a href="https://www.mindsetkit.org">
+                        <img src="{{ domain }}/static/images/email/mindsetkit-logo.png" height="16px">
+                      </a>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <table class="email-body">
+                  <tr>
+                    <td>
+                      <p>
+                        Hi {{ short_name }},
+                      </p>
+                      <p>
+                        A member of the Mindset Kit community commented on your content in the resource library, <b><a href="{{ domain + content_url }}">{{ content_name }}</a></b>
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="comment-info">
+                      <div class="commenter-info">
+                        <div class="commenter-image" style="background-image: url('{{ commenter_image_url }}');"></div>
+                        <a href="{{ domain + content_url }}">
+                          {{ commenter_name }}
+                        </a>
+                      </div>
+                      <div class="comment-text">
+                        <p>
+                          {{ comment_body }}
+                        </p>
+                      </div>
+                      <div class="spacer"></div>
+                      <a href="{{ domain + content_url }}" class="cta">
+                        View in Mindset Kit
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+
+          <table class="email-footer">
+            This message was intended for {{ full_name }}<br>
+            PERTS &copy; 2015  |   All Rights Reserved<br>
+            <a href="*|UNSUB:https://mindsetkit.org/unsubscribe|*">
+              Unsubscribe
+            </a>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

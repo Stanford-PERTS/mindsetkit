@@ -1,0 +1,84 @@
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"></meta>
+    {% include '_styles.html' %}
+    <style type="text/css">
+      a.cta, button.cta {
+        background-color: #06d6a0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <table class="email-outer">
+      <tr>
+        <td>
+          <table class="email-inner">
+            <tr>
+              <td>
+                <table class="email-header">
+                  <tr>
+                    <td>
+                      <a href="https://www.mindsetkit.org">
+                        <img src="{{ domain }}/static/images/email/mindsetkit-logo.png" height="16px">
+                      </a>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <table class="email-body">
+                  <tr>
+                    <td>
+                      <p>
+                        Hi {{ short_name }},
+                      </p>
+                      <p>
+                        Your practice has been <b>approved!</b> Now it can be discovered by our users on the resources search page.
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="practice-info">
+                      <img src="{{ domain }}/static/images/email/accepted-icon.png" height="70px">
+                      <h2>
+                        <a href="{{ domain + practice_url }}" class="practice-title">
+                          {{ practice_name }}
+                        </a>
+                      </h2>
+                      <div class="spacer"></div>
+                      <a href="{{ domain + practice_url }}" class="cta">
+                        View Practice
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>
+                        Your content helps make the Mindset Kit great for others - feel free to let us know if there's anything we can do to improve your experience!
+                      </p>
+                      <br>
+                      <p>
+                        - The Mindset Kit Team
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+
+          <table class="email-footer">
+            This message was intended for {{ full_name }}<br>
+            PERTS &copy; 2015  |   All Rights Reserved<br>
+            <a href="*|UNSUB:https://mindsetkit.org/unsubscribe|*">
+              Unsubscribe
+            </a>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="full-container clean-style mindsetmeter-page">
+
+  <div class="page-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <h1>Guide for Implementing a Survey</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-content">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <p>
+            Tell Your Participants...
+          </p>
+          <ul>
+            <li>
+              "Go to
+              <a href="//{{hosting_domain}}/go" target="_blank"
+                 style="text-decoration: underline;">
+                {{hosting_domain}}/go
+              </a>
+              in your browser."
+            </li>
+            {% for key in survey.public_keys %}
+            <li>
+              <i>For phase {{ loop.index }}:</i> "Enter the code <b>{{ survey.entry_code }} {{ loop.index }}</b> and click <b>Next</b>."
+            </li>
+            {% endfor %}
+            <li>
+              "Then type your initials in the box, and choose the month and day you were born."
+            </li>
+            <li>
+              "Then click <b>Next</b>."
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}

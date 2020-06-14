@@ -1,0 +1,271 @@
+{% extends 'base.html' %}
+
+<!-- SEO tags -->
+
+{% set title = "Resources for growth and learning mindsets" %}
+{% set desc = "A free resource for educators and parents who want to foster learning mindsets such as growth mindset. Follow lessons and practices from experts and members of our community." %}
+
+{% set controller = "LandingCtrl" %}
+
+{% block content %}
+
+<div scroll="" class="full-container main-page-new">
+
+  {% if user %}
+  <div class="main-page_masthead signed-in">
+  {% else %}
+  <div class="main-page_masthead">
+  {% endif %}
+    <div class="masthead_background"></div>
+    <div class="container">
+      <div class="row">
+
+        <div class="col-md-6">
+          <!-- masthead text -->
+          <div class="masthead-inner">
+            <h1 class="masthead_title">
+              Everything about <b>mindset.</b>
+            </h1>
+            <p class="masthead_text">
+              The Mindset Kit is a free set of online lessons and practices designed to help you teach and foster adaptive beliefs about learning.
+            </p>
+            <i>Sign up to receive updates &amp; join our community</i>
+            <br>
+            <a class="primary-button" data-toggle="modal" data-target="#signupModal">Get started</a>
+          </div>
+          <!-- masthead text -->
+        </div>
+
+        <div class="col-md-6">
+          <!-- masthead highlighted topic -->
+          <div class="masthead_topic mask" ng-class="{loaded: highlightedTopic}">
+            <a
+              class="topic-wrapper"
+              ng-href="{[highlightedTopic.link]}"
+            >
+              <div class="topic-header">Highlighted Topic</div>
+              <h3>{[ highlightedTopic.title ]}</h3>
+              <div class="image-holder">
+                <img src="{[ highlightedTopic.imgSrc ]}" alt="{[ highlightedTopic.imgAlt ]}">
+              </div>
+            </a>
+          </div>
+          <!-- masthead video -->
+          <!--
+          <div class="masthead_video">
+            <img src="/static/images/masthead-video-preview-01.png" alt="" />
+            <div class="play-button" data-toggle="modal" data-target="#videoModal"></div>
+            <div class="caption">
+              Learn the latest about mindsets from PERTS founder Dave Paunesku
+            </div>
+          </div>
+          -->
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="main-page_enrolling"></div>
+
+  <div class="main-page_body">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+
+          <a class="banner" href="https://perts.net/engage">
+            <p class="header">Check out the Engagement Project</p>
+            <p>
+              Designed to help teachers create a more engaging and more
+              equitable classroom climate.
+            </p>
+            <span class="button inline">
+              Click Here to Learn More
+            </span>
+          </a>
+
+          <!-- Lists topics in Mindset Kit -->
+
+          <h4>
+            Growth Mindset for Educators
+          </h4>
+
+          <div ng-repeat="topic in topics.gmsForEducators">
+            <a
+              class="topic-wrapper"
+              ng-href="{[topic.link]}"
+            >
+              <h3>{[ topic.title ]}</h3>
+              <p>{[ topic.description ]}</p>
+              <div class="image-holder">
+                <img src="{[ topic.imgSrc ]}" alt="{[ topic.imgAlt ]}">
+              </div>
+            </a>
+          </div>
+
+          <h4>
+            Belonging
+          </h4>
+
+          <div ng-repeat="topic in topics.belonging">
+            <a
+              class="topic-wrapper"
+              ng-href="{[topic.link]}"
+            >
+              <h3>{[ topic.title ]}</h3>
+              <p>{[ topic.description ]}</p>
+              <div class="image-holder">
+                <img src="{[ topic.imgSrc ]}" alt="{[ topic.imgAlt ]}">
+              </div>
+            </a>
+          </div>
+
+          <h4>
+            Specialized Materials
+          </h4>
+
+          <div ng-repeat="topic in topics.specialized">
+            <a
+              class="topic-wrapper"
+              ng-href="{[topic.link]}"
+            >
+              <h3>{[ topic.title ]}</h3>
+              <p>{[ topic.description ]}</p>
+              <div class="image-holder">
+                <img src="{[ topic.imgSrc ]}" alt="{[ topic.imgAlt ]}">
+              </div>
+            </a>
+            <a
+              ng-if="topic.title === 'Growth Mindset for Parents'"
+              class="alternate-topic"
+              href="/mentalidad-de-crecimiento-padres"
+            >
+              Disponible en español &mdash; Mentalidad De Crecimiento Para Los Padres
+            </a>
+          </div>
+
+          <!-- Footer shows everywhere but mobile -->
+
+          <div class="main_footer">
+            <div class="main_footer_navigation">
+              <a href="/about">About Us</a>
+              &nbsp;|&nbsp;&nbsp;
+              <a href="/search">Search</a>
+              &nbsp;|&nbsp;&nbsp;
+              <a data-toggle="modal" data-target="#feedbackModal">Feedback</a>
+              &nbsp;|&nbsp;&nbsp;
+              <a href="https://www.perts.net" target="_blank">PERTS</a>
+            </div>
+
+            <div class="main_footer_license">
+              <div>
+                Except for the videos or where otherwise noted, content on this
+                site is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">
+                Creative Commons Attribution 4.0 International License</a>.
+                Please attribute credit to the PERTS Mindset Kit.
+              </div>
+              <div>
+                <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">
+                  <img src="https://i.creativecommons.org/l/by/4.0/88x31.png" alt="License">
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  {% if user %}
+  <div id="mainSidepanel" ng-class="{affix: affixSidePanel}"
+       class="signed-in">
+  {% else %}
+  <div id="mainSidepanel" ng-class="{affix: affixSidePanel}">
+  {% endif %}
+    <div class="main-page_practices-inner">
+      <h2>Popular Resources</h2>
+      <p class="subheader">
+        Try these favorite resources from our community.
+      </p>
+      <a href="/practices/{[practice.short_uid]}" class="practice-wrapper" ng-repeat="practice in popularPractices">
+        <div class="practice_title">
+          {[ practice.name ]}
+        </div>
+        <div class="practice_info">
+          {[ practice.summary ]}
+        </div>
+        <div class="practice_icon" ng-class="{'icon--video': practice.youtube_id, 'icon--files': practice.has_files}"></div>
+      </a>
+
+      <div class="practice-menu_buttons">
+        <div class="spacer"></div>
+
+        <a class="primary-button" href="/search"><i class="fa fa-search"></i> Explore all resources</a>
+        <br>
+        <a class="secondary-button" ng-click="uploadPractice()">Upload a resource</a>
+      </div>
+    </div>
+
+    <!-- Footer shows only on mobile -->
+
+    <div class="main_footer">
+      <a href="/about">About Us</a>
+      &nbsp;|&nbsp;&nbsp;
+      <a href="/search">Search</a>
+      &nbsp;|&nbsp;&nbsp;
+      <a data-toggle="modal" data-target="#feedbackModal">Feedback</a>
+      &nbsp;|&nbsp;&nbsp;
+      <a href="https://www.perts.net" target="_blank">PERTS</a>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}
+
+{% block feedback %}
+{% endblock %}
+
+{% block videomodal %}
+<div class="modal fade video-modal" tabindex="-1" role="dialog" id="videoModal">
+  <div class="modal-dialog" onclick="yt_players['videoPlayer'].pauseVideo();" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe id="videoPlayer" class="ytplayer" src="https://www.youtube.com/embed/K7xJUABW9Wg?enablejsapi=1&amp;wmode=transparent&amp;rel=0&amp;showinfo=0" allowfullscreen="true">
+          </iframe>
+        </div>
+      </div>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <div aria-hidden="true">×</div>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+var yt_int,
+  yt_players = {},
+  initYT = function() {
+    $('.ytplayer').each(function() {
+      yt_players[this.id] = new YT.Player(this.id);
+    });
+  };
+$.getScript('//www.youtube.com/player_api', function() {
+  yt_int = setInterval(function() {
+    if (typeof YT === 'object') {
+      initYT();
+      clearInterval(yt_int);
+    }
+  }, 500);
+});
+$('body').on('click', function(e) {
+  if (yt_players['videoPlayer']) {
+    yt_players['videoPlayer'].pauseVideo();
+  }
+});
+</script>
+{% endblock %}

@@ -1,0 +1,69 @@
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"></meta>
+    {% include '_styles.html' %}
+    <style type="text/css">
+      p a {
+        color: #6f58b0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <table class="email-outer">
+      <tr>
+        <td>
+          <table class="email-inner">
+            <tr>
+              <td>
+                <table class="email-header">
+                  <tr>
+                    <td>
+                      <a href="https://www.mindsetkit.org">
+                        <img src="{{ domain }}/static/images/email/mindsetkit-logo.png" height="16px">
+                      </a>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <table class="email-body">
+                  <tr>
+                    <td>
+                      <p>
+                        Hi {{ short_name }},
+                      </p>
+                      <p>
+                        Thank you for signing up and creating an account on the <a href="{{ domain }}">PERTS Mindset Kit</a>. We're excited to work with you!
+                      </p>
+                      <p>
+                        If you haven't already, be sure to update your <a href="{{ domain }}/profile">profile</a>. This will help others learn who you are when you upload a practice or leave a comment. You can find teacher-uploaded practices and more on our <a href="{{ domain }}/search">resource page.</a>
+                      </p>
+                      <p>
+                        Feel free to message <a href="</a> or reply to this email with any feedback or thoughts about Mindset Kit.
+                      </p>
+                      <br>
+                      <p>
+                        - The Mindset Kit Team
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+
+          <table class="email-footer">
+            This message was intended for {{ full_name }}<br>
+            PERTS &copy; 2015  |   All Rights Reserved<br>
+            <a href="*|UNSUB:https://www.mindsetkit.org/unsubscribe|*">
+              Unsubscribe
+            </a>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

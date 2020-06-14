@@ -1,0 +1,271 @@
+{% extends 'base.html' %}
+
+<!-- SEO tags -->
+
+{% set title = "About Learning Mindsets" %}
+{% set desc = "Learn more about the Mindset Kit and learning mindsets: growth, belonging, and purpose mindsets" %}
+{% set controller = "AboutCtrl" %}
+
+{% block content %}
+<div class="full-container about-page">
+
+  <div class="masthead--about">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+          <h1>About the Mindset Kit</h1>
+          <div class="circle-holder">
+            <a href="/" class="circle-button" data-toggle="tooltip" title="Mindset Kit Home" data-placement="top">
+              &nbsp;<i class="fa fa-chevron-right fa-lg"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-page_body">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+
+          <div class="callout">
+            &ldquo;Providing learning mindset resources directly to a wide audience to help them adopt practices and improve student achievement&rdquo;
+          </div>
+
+          <p>
+            The Mindset Kit was created by <a href="https://www.perts.net" target="_blank">The Project for Education Research that Scales (PERTS)</a>, a research center in the psychology department at Stanford University. Our goal is to create a place where educators and parents can learn about and find the most effective learning mindset materials available. All of our resources are based on research that has been carefully translated into lessons and practices intended to improve students’ mindsets and make them better learners. We currently offer targeted materials for teachers and parents to ensure our messaging is as effective as possible.
+          </p>
+
+          <div class="perts-logo-wrapper">
+            <a href="https://www.perts.net">
+              <img src="/static/images/perts-logo.png">
+            </a>
+          </div>
+
+          <h3>What exactly is a &ldquo;learning mindset?&rdquo;</h3>
+
+          <p>
+            Learning mindsets are a set of beliefs that are linked to increased academic performance in students. There are three main learning mindsets we commonly reference: <b>growth mindset</b>, <b>belonging</b>, and <b>purpose &amp; relevance</b>. Each has its own unique characteristics and is based on years of research.
+          </p>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 col-md-10 col-md-offset-1 ">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="mindset-section">
+                <img src="/static/images/mindset-icon-growth.png" alt="Growth Mindset">
+                <h4>Growth Mindset</h4>
+                <p>
+                  Students are more likely to persist through challenges when they understand that intelligence is malleable, rather than a fixed trait.
+                </p>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="mindset-section">
+                <img src="/static/images/mindset-icon-belonging.png" alt="Belonging Mindset">
+                <h4>Belonging Mindset</h4>
+                <p>
+                  Students who have a strong sense of belonging in their environment are more likely to succeed and persist through challenges.
+                </p>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="mindset-section">
+                <img src="/static/images/mindset-icon-purpose.png" alt="Purpose &amp; Relevance">
+                <h4>Purpose &amp; Relevance</h4>
+                <p>
+                  When students believe that schoolwork has a purpose and relates to their life outside of school, they are more eager to learn.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+
+          <h3>Growth and fixed mindset</h3>
+          <p>
+            Currently, most topics in the Mindset Kit are built for teaching and understanding a growth mindset (and its counterpart &mdash; a fixed mindset). We have several videos to help you learn more about these mindsets and example practices that can help you get started.
+          </p>
+          <p>
+            You can select a topic from our
+            <a href="/">home page</a>
+            that best fits your interests. Or, if you are interested in researching the science behind some of the other learning mindsets, we suggest reading more on the
+            <a href="http://mindsetscholarsnetwork.org/" target="_blank">Mindset Scholars Network website</a>.
+          </p>
+
+          <h3>
+            Open collaboration
+          </h3>
+          <p>
+            The Mindset Kit is a place to find <b><i>all</i></b> the best resources and practices related to learning mindsets. PERTS creates much of its own content, but we also partner with individuals and organizations to make our content better. Some of our most popular resources are the <a href="/growth-mindset/teaching-growth-mindset/growth-mindset-lesson-plan">growth mindset lesson plan</a> we made in collaboration with Khan Academy and the practice videos we made with the Teaching Channel. We are hard at work improving all our materials and building new topics to explain other learning mindsets and to reach a wider audience. We encourage potential partners to reach out to us.
+          </p>
+          <p>
+            In addition, the Mindset Kit has a <a href="/search">resource library</a> where we encourage our visitors to post their own materials. PERTS strongly values a growth mindset and we understand that we can learn even more by working with specialists and practitioners&mdash;from school principals to enthusiastic parents.
+          </p>
+
+          <h3>
+            What have we learned so far?
+          </h3>
+          <p>
+            We care deeply about our collaborations with teachers and with school districts so that we can learn what is working, what is challenging, and what resources or knowledge are missing.
+          </p>
+          <p>
+            In February 2016, we released a report titled,
+            <a href="/static/files/Mindset_Kit_Engagement_Report.pdf"
+               target="_blank"
+               ng-click="trackDownload('Mindset_Kit_Engagement_Report.pdf')">
+              Promoting Learning Mindsets in Schools: Lessons from Educators' Engagement with the PERTS Mindset Kit</a>.
+            This report highlights what we have learned about how educators are using the Mindset Kit resources, what challenges they encounter, and what areas for future development have emerged. These findings may be of value to educators, policymakers, and foundations interested in supporting broad adoption of mindset supporting practices and policies.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% if not user %}
+  <div id="subscribe" class="contect-section subscribe-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+          <div class="subscription-box">
+            <form action="//perts.us10.list-manage.com/subscribe/post?u=7edccf60df2a8af6ca924978b&amp;id=fb3a4dfa59" method="post" class="validate" target="_blank" novalidate>
+              <h2>Subscribe to receive updates</h2>
+              <p>
+                Create an account and be the first to find out about new topics, materials, and features in the Mindset Kit
+              </p>
+              <div class="input-wrapper">
+                <a data-toggle="modal" data-target="#signupModal" class="rounded-button">
+                  Sign me up!
+                </a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  <div id="resources" class="content-section resources-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+          <h3>Key Partners</h3>
+
+          <div class="partner-wrapper">
+            <a href="https://www.khanacademy.org/" target="_blank">
+              <img src="/static/images/partners/khan-academy.png" alt="Khan Academy">
+            </a>
+
+            <h4><a href="https://www.khanacademy.org/" target="_blank">Khan Academy</a></h4>
+            <p>
+              Khan Academy is a nonprofit with a mission to provide a free, world-class education for anyone, anywhere. They believe learners of all ages should have unlimited access to free educational content they can master at their own pace. Over 100 million people use their platform worldwide every year. PERTS helps Khan Academy incorporate the latest insights from mindset research into their programs.
+            </p>
+          </div>
+
+          <div class="partner-wrapper">
+            <a href="https://ccsr.uchicago.edu/" target="_blank">
+              <img src="/static/images/partners/uchicago-ccsr.png" alt="UChicago CCSR">
+            </a>
+
+            <h4><a href="https://ccsr.uchicago.edu/" target="_blank">The Consortium on Chicago School Research</a></h4>
+            <p>
+              The Consortium on Chicago School Research (CCSR) brought together dozens of Chicago Public School teachers and Camille Farrington's University of Chicago research lab to co-develop mindset practices using an improvement science approach. They also funded the creation of our <a href="/search">Resource Library</a> so these practices could be widely shared.
+            </p>
+          </div>
+
+          <div class="partner-wrapper">
+            <a href="http://www.newteachercenter.org/" target="_blank">
+              <img src="/static/images/partners/new-teacher-center.png" alt="New Teacher Center">
+            </a>
+
+            <h4><a href="http://www.newteachercenter.org/" target="_blank">The New Teacher Center</a></h4>
+            <p>
+              The New Teacher Center organized and co-led focus groups with dozens of mentors in their network to garner feedback on the Mindset Kit. We also collaborated with them to create new materials and content for the Mindset Kit, which will include a practice video.
+            </p>
+          </div>
+
+          <div class="partner-wrapper">
+            <a href="http://home.lausd.net/" target="_blank">
+              <img src="/static/images/partners/gearup4la.png" alt="GearUp4LA">
+            </a>
+
+            <h4><a href="http://home.lausd.net/" target="_blank">Los Angeles Unified School District, GearUp4LA</a></h4>
+            <p>
+              Los Angeles Unified School District (LAUSD) GearUp4LA schools are working with PERTS to evaluate and refine the <a href="/growth-mindset-educator-teams">Growth Mindset for Educator Teams</a> so they can better support school-wide adoption of growth mindset practices. Our collaboration is funded by a U.S. Department of Education <a href="http://www.ed.gov/news/press-releases/us-department-education-announces-first-ever-skills-success-grants-and-initiative-support-learning-mindsets-and-skills" target="_blank">Skills for Success</a> grant.
+            </p>
+          </div>
+
+          <div class="partner-wrapper">
+            <a href="http://www.baltimorecityschools.org/" target="_blank">
+              <img src="/static/images/partners/baltimore-city-public-schools.png" alt="Baltimore City Public Schools">
+            </a>
+
+            <h4><a href="http://www.baltimorecityschools.org/" target="_blank">Baltimore City Schools</a></h4>
+            <p>
+              Baltimore City Schools have been working with PERTS to pilot the <a href="/growth-mindset-educator-teams">Growth Mindset for Educator Teams</a> materials. Together, we're learning what teachers get out of the course and how we can improve it to better support school-wide adoption of growth mindset practices.
+            </p>
+          </div>
+
+          <div class="partner-wrapper">
+            <a href="http://raisethebarparents.org/" target="_blank">
+              <img src="/static/images/partners/raise-the-bar.png" alt="Raise the Bar">
+            </a>
+
+            <h4><a href="http://raisethebarparents.org/" target="_blank">Raise The Bar</a></h4>
+            <p>
+              Raise The Bar and PERTS worked together to develop the <a href="/growth-mindset-parents">Growth Mindset for Parents</a>, which is featured on both the Mindset Kit and on <a href="http://raisethebarparents.org/" target="_blank">RaiseTheBarParents.org</a>, a site that helps parents learn about the Common Core and how to prepare their kids for it.
+            </p>
+          </div>
+
+          <div class="partner-wrapper">
+            <a href="http://www.mentoring.org/" target="_blank">
+              <img src="/static/images/partners/mentor.png" alt="MENTOR">
+            </a>
+
+            <h4><a href="http://www.mentoring.org/" target="_blank">MENTOR</a></h4>
+            <p>
+              MENTOR and PERTS partnered to develop the <a href="/growth-mindset-mentors">Growth Mindset for Mentors</a> course. MENTOR improves the quality and quantity of mentoring relationships in the United States.
+            </p>
+          </div>
+
+          <div class="partner-wrapper">
+            <a href="https://www.cityyear.org/" target="_blank">
+              <img src="/static/images/partners/city-year.png" alt="City Year">
+            </a>
+
+            <h4><a href="https://www.cityyear.org/" target="_blank">City Year</a></h4>
+            <p>
+              City Year, in partnership with MENTOR and PERTS, piloted the <a href="/growth-mindset-mentors">Growth Mindset for Mentors</a> course. City Year is an education nonprofit organization fueled by national service that is dedicated to improving student outcomes and keeping more students on track to graduate in our nation’s highest-need schools.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="funding" class="content-section funding-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <a href="http://raikesfoundation.org/" target="_blank">
+            <image src="/static/images/raikes_logo.png"></image>
+          </a>
+          <h4>Funded by the Raikes Foundation</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% include 'components/footer.html' %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,48 @@
+{% set base_url = "https://" + hosting_domain %}
+
+<footer>
+  <div class="container">
+    <div class="row">
+
+      <div class="col-sm-6 footer_links">
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/search">Search</a>
+        <a href="#" data-toggle="modal" data-target="#feedbackModal">Feedback</a>
+        <a href="https://www.perts.net/" target="_blank">|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PERTS</a>
+      </div>
+
+      <div class="col-sm-6 footer_social-links">
+        <a share-button="main" share-type="facebook" share-url="{{base_url}}"><i class="fa fa-facebook fa-lg"></i></a>
+        <a share-button="main" share-type="twitter" share-url="{{base_url}}" share-text="{{share_text}}"><i class="fa fa-twitter fa-lg"></i></a>
+        <a share-button="main" share-type="google" share-url="{{base_url}}"><i class="fa fa-google fa-lg"></i></a>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6 footer_legal">
+        PERTS &copy; {{ server_time.year }}
+        |
+        <a href="https://perts.net/terms-of-use" target="_blank">Terms of Use</a>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6 footer_legal footer_license">
+        <div>
+          Except for the videos or where otherwise noted, content on this
+          site is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">
+          Creative Commons Attribution 4.0 International License</a>.
+          Please attribute credit to the PERTS Mindset Kit.
+        </div>
+        <div>
+          <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">
+            <img src="https://i.creativecommons.org/l/by/4.0/88x31.png" alt="License">
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</footer>

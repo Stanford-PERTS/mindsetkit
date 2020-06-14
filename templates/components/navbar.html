@@ -1,0 +1,162 @@
+<!-- IMPORTANT! Include target="_self" on all links to prevent navigation errors from the (Angular $location using) search page -->
+
+<div class="navbar navbar-default navbar-static-top" navbar="">
+  <div class="container">
+    <div class="navbar-header">
+
+      <!-- Brand info -->
+      <a href="/" target="_self" class="navbar-brand"><b>MINDSET</b><i>KIT</i></a>
+
+      <!-- Topic selection -->
+      <span class="subapps">
+        <a ng-click="toggleDropdown('showCourses')" class="navbar-subapp no-propagation">
+          For Teachers&nbsp;&nbsp;<i class="fa fa-caret-down subapp-toggle no-propagation"></i>
+        </a>
+      </span>
+
+      <!-- Parents selection -->
+      <span class="subapps">
+        <a href="/growth-mindset-parents" class="navbar-subapp" target="_self">
+          For Parents
+        </a>
+      </span>
+
+      <!-- Mentor selection -->
+      <span class="subapps">
+        <a href="/growth-mindset-mentors" class="navbar-subapp" target="_self">
+          For Mentors
+        </a>
+      </span>
+
+      <!-- PD selection -->
+      <span class="subapps">
+        <a href="/growth-mindset-educator-teams" class="navbar-subapp" target="_self">
+          Professional Development
+        </a>
+      </span>
+
+      <!-- About selection -->
+      <span class="subapps">
+        <a href="/about" class="navbar-subapp" target="_self">
+          About
+        </a>
+      </span>
+
+      <!-- Mobile-only dropdown toggler -->
+      <a ng-click="toggleDropdown('showCourses')"
+         class="toggle-button explore-toggler mobile-only no-propagation">
+        <i class="fa fa-compass fa-lg no-propagation"></i>
+      </a>
+
+      <!-- Search icon not shown on mobile -->
+      <a href="/search" target="_self" class="search-button mobile-hidden">
+        <i class="fa fa-search"></i>
+      </a>
+
+      <!-- Regristration or user information -->
+      <div class="registration">
+        {% if user %}
+          <a ng-click="toggleDropdown('showOptions')"
+             target="_self" class="user-info image-wrapper no-propagation">
+            <span user-image="" user="user" class="user-image no-propagation"></span>
+          </a>
+        {% else %}
+          <a ng-click="showLogin()" class="mobile-hidden login-button">Login</a>
+          <a ng-click="showSignup()" class="main-button mobile-hidden">Sign up</a>
+          <a ng-click="toggleDropdown('showOptions')"
+             class="toggle-button mobile-only no-propagation">
+            <i class="fa fa-bars fa-lg no-propagation"></i>
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <!-- User option dropdown -->
+
+  <div ng-class="{active: showOptions}" class="navbar-dropdown">
+    <ul>
+      {% if user %}
+      <li ng-click="viewProfile()">Your profile</li>
+      <li ng-click="uploadPractice()">Upload Practice</li>
+      <li ng-click="logout()">Logout</li>
+      {% else %}
+      <li ng-click="showLogin()">Login</li>
+      <li ng-click="showSignup()">Signup</li>
+      {% endif %}
+      <li data-toggle="modal" data-target="#feedbackModal">Give feedback</li>
+    </ul>
+  </div>
+
+  <!-- Teacher topics dropdown -->
+
+  {% include 'components/topic-dropdown.html' %}
+
+  <!-- Topics menu (mobile-only) -->
+
+  <div ng-class="{active: showCourses, extended: showTeacherTopics}" class="navbar-options navbar-options--topics mobile-only">
+    <ul>
+      <li ng-click="showTeacherTopics = !showTeacherTopics"
+          class="no-propagation"
+          ng-class="{active: showTeacherTopics}">
+        For Teachers
+      </li>
+      <ul class="topic-list" ng-class="{active: showTeacherTopics}">
+        <li>
+          <a href="/belonging" target="_self">
+            Belonging for Educators
+          </a>
+        </li>
+        {% for topic in teacher_topics %}
+        <li>
+          <a href="/topics/{{ topic.short_uid }}" target="_self">
+            {{ topic.name }}
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+      <li>
+        <a href="/growth-mindset-parents" target="_self">
+          For Parents
+        </a>
+      </li>
+      <li>
+        <a href="/growth-mindset-mentors" target="_self">
+          For Mentors
+        </a>
+      </li>
+      <li>
+        <a href="/growth-mindset-educator-teams" target="_self">
+          Professional Development
+        </a>
+      </li>
+      <li>
+        <a href="/about" target="_self">
+          About
+        </a>
+      </li>
+      <li>
+        <a href="/search" target="_self">
+          <i class="fa fa-search">&nbsp;&nbsp;</i>Search
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- User options (mobile-only) -->
+
+  <div ng-class="{active: showOptions}" class="navbar-options mobile-only">
+    <ul>
+      {% if user %}
+      <li ng-click="viewProfile()">Your profile</li>
+      <li ng-click="uploadPractice()">Upload Resource</li>
+      <li ng-click="logout()">Logout</li>
+      {% else %}
+      <li ng-click="showLogin()">Login</li>
+      <li ng-click="showSignup()">Signup</li>
+      {% endif %}
+      <li data-toggle="modal" data-target="#feedbackModal">Give feedback</li>
+    </ul>
+  </div>
+
+</div>

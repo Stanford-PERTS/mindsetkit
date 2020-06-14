@@ -1,0 +1,84 @@
+<div class="search-result">
+
+  <div class="title-row">
+
+    <h2>
+      <a href="{[ link ]}" target="_self" ng-show="link">
+        <span style="color: #aaa" ng-show="result.pending">[Pending]</span>
+        <span style="color: #ff6677" ng-show="rejected">[Rejected]</span>
+        {[ result.name ]}
+      </a>
+      <a ng-click="loadCourses()" ng-hide="link" ng-cloak>
+        {[ result.name ]}
+        {[ scope.rejected ]}
+      </a>
+    </h2>
+
+    <span class="activity-data" ng-hide="isYours && kind === 'Practice'">
+      <span class="votes-group" ng-class="{highlight: result.user_voted_for}">
+        <i class="fa fa-heart"></i>&nbsp;{[ result.votes_for || '0' ]}
+      </span>
+      <span class="comments-group" ng-class="{highlight: result.user_commented_on}">
+        <i class="fa fa-comments fa-lg"></i>&nbsp;{[ result.num_comments || '0' ]}
+      </span>
+    </span>
+
+  </div>
+
+  <div class="tag-row">
+    <!-- make sure there's no whitespace between spans, otherwise spacing
+    between tags gets thrown off -->
+    <span class="attachment-tag tag" ng-show="hasFiles">
+      <i class="fa fa-download"></i>&nbsp;Downloadable
+    </span><span class="attachment-tag tag" ng-show="isVideo">
+      <i class="fa fa-play-circle-o"></i>&nbsp;Video
+    </span><span class="content-tag tag" ng-show="kind === 'Practice'" ng-cloak>
+      Practice Recommendation
+    </span><span class="content-tag tag" ng-show="kind === 'Lesson'" ng-cloak>
+      Course lesson
+    </span><span ng-if="result.array"><span class="content-tag tag" ng-repeat="tag in result.tags" ng-cloak>
+      {{ tag }}
+    </span></span>
+    <span class="content-tag tag" ng-cloak ng-if="!result.array">
+      {{ result.tags }}
+    </span>
+  </div>
+
+  <p class="summary">
+    {[ result.summary ]}
+  </p>
+
+  <a href="{[userLink]}" target="_self" class="author-row" ng-show="kind === 'Practice' && !profileResult">
+    <div class="user-image-wrapper">
+      <div class="user-image" user-image="" user="result.user"></div>
+    </div>
+    <div class="posting-data">
+      <div class="byline">
+        Posted by {[ result.user.first_name ]} {[ result.user.last_name ]}
+      </div>
+      <div class="date">
+        {[ result.createdPrettyDate ]}
+      </div>
+    </div>
+  </a>
+
+  <div class="lesson-indicator"
+       ng-show="kind === 'Lesson' && !coursesFound"
+       ng-click="loadCourses()">
+    <span ng-hide="loadingCourses">
+      View in topic <i class="fa fa-caret-right"></i>
+    </span>
+    <span ng-show="loadingCourses">
+      Loading <i class="fa fa-spinner fa-spin"></i>
+    </span>
+  </div>
+
+  <div class="course-instructions" ng-show="courses">
+    Select a course to view lesson
+  </div>
+
+  <a class="course-link" href="{[course.lesson_link]}" target="_self" ng-repeat="course in courses">
+    {[ course.name ]}
+  </a>
+
+</div>

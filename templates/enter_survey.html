@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+{% set controller = "EnterSurveyCtrl" %}
+{% set privacy_message = "Your answers to this survey will be anonymous.<br>We do not store identifying information about you." %}
+
+{% block content %}
+
+<div class="full-container clean-style mindsetmeter-participant-page">
+  <div class="page-content">
+    <div class="container">
+
+      <!-- Page 1: survey code entry, same for everyone. -->
+
+      <form name="entryCodeForm" ng-submit="submitCode()" novalidate ng-cloak
+            ng-show="mode == 'entry_code'">
+        <div class="form-content">
+          <label>
+            Please enter your code
+            <input type="text" ng-model="phaseCode" to-lower-case required>
+          </label>
+          <div>
+            <span ng-show="entryCodeSubmitted && !entryCodeValid">
+              We don't recognize that code.
+            </span>
+            <span ng-show="entryCodeSubmitted && !entryCodePatternValid">
+              Codes are always two words and a number.
+            </span>
+          </div>
+        </div>
+        <div class="nav-footer">
+          <button class="rounded-button btn btn-primary" ng-click="submitCode">
+            Next
+          </button>
+        </div>
+      </form>
+
+      <!-- Page 2a: identification via initials and birthday. -->
+
+      <form name="initialsForm" ng-submit="submitIdentifier()" novalidate
+            ng-cloak ng-show="mode == 'initials'">
+        <div class="form-content">
+          <label>
+            My initials are
+            <input type="text" ng-model="initials" to-upper-case alpha-only
+                   required>
+          </label>
+          <br>
+          <label>
+            I was born on
+          <select ng-model="birthMonth" required
+                  ng-options="index as month for (index, month) in months">
+          </select>
+          </label>
+          <input type="number" ng-model="birthDay" required
+                 ng-disabled="birthMonth == undefined" name="birth_date"
+                 ng-min="1" ng-max="daysPerMonth[birthMonth] || 31">
+        </div>
+        <div class="nav-footer">
+          <p>{{ privacy_message | safe }}</p>
+          <button class="rounded-button btn btn-primary" type="submit"
+                  ng-disabled="initialsForm.$invalid">
+            Next
+          </button>
+        </div>
+      </form>
+
+      <!-- Page 2b: identification via arbitrary text. -->
+
+      <form name="idForm" ng-submit="submitIdentifier()" novalidate ng-cloak
+            ng-show="mode == 'ids'">
+        <div class="form-content">
+          <p ng-show="idForm.id.$viewValue.length >= 5 && idForm.$invalid">
+            ASCII only
+          </p>
+          <label>
+            Please enter your ID
+            <!-- The "name" attribute allows use to use $viewValue to see the
+                 raw, invalid text and give the user a hint. Without this
+                 technique, invalid inputs never enter the model and can't be
+                 monitored.
+                 http://stackoverflow.com/questions/19817602/get-raw-value-from-invalid-input-field
+                 https://docs.angularjs.org/api/ng/type/ngModel.NgModelController#$viewValue
+            -->
+            <input type="text" ng-model="id" name="id"
+                   ng-pattern="identifierPattern" required>
+          </label>
+        </div>
+        <div class="nav-footer">
+          <p>{{ privacy_message | safe }}</p>
+          <button class="rounded-button btn btn-primary" type="submit"
+                  ng-disabled="idForm.$invalid">
+            Next
+          </button>
+        </div>
+      </form>
+
+      <!-- Page 2c: identification via Mindset Kit user account. -->
+
+      <form name="mskForm" ng-submit="submitIdentifier()" novalidate ng-cloak
+            ng-show="mode == 'msk'">
+        <div class="form-content">
+            <p>
+            You're already signed in as {[ user.email ]}.
+            You're all set to start!
+          </p>
+        </div>
+        <div class="nav-footer">
+          <p>{{ privacy_message | safe }}</p>
+          <button class="rounded-button btn btn-primary" type="submit">
+            Next
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block navbar %}
+<!-- navbar suppressed so as not to distract from survey entry -->
+{% endblock %}

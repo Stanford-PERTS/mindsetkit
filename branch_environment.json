@@ -1,0 +1,51 @@
+{
+    "_description": "",
+    "master": {
+        "app.yaml": {
+            "_description": "",
+            "PROJECT_ID": "",
+            "APP_ENGINE_VERSION": "",
+            "HOSTING_DOMAIN": ""
+        },
+        "cron.yaml": {
+            "_description": "",
+            "_all": true
+        }
+    },
+    "acceptance": {
+        "app.yaml": {
+            "_description": "",
+            "PROJECT_ID": "",
+            "APP_ENGINE_VERSION": "",
+            "HOSTING_DOMAIN": ""
+        },
+        "cron.yaml": {
+            "_description": "",
+            "_all": false
+        }
+    },
+    "dev": {
+        "app.yaml": {
+            "_description": "",
+            "PROJECT_ID": "",
+            "APP_ENGINE_VERSION": "",
+            "HOSTING_DOMAIN": ""
+        },
+        "cron.yaml": {
+            "_description": "",
+            "_all": false
+        }
+    },
+    "beta": {
+        "app.yaml": {
+            "_description": "",
+            "PROJECT_ID": "",
+            "APP_ENGINE_VERSION": "",
+            "HOSTING_DOMAIN": ""
+        },
+        "cron.yaml": {
+            "_description": "",
+            "_all": false
+        }
+    }
+}
